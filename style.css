@@ -1,0 +1,276 @@
+/* --- RESET CSS DASAR --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+h1, h2, h3, .date {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shadow {
+    box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+}
+
+.shadow-light {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* --- SECTION UMUM --- */
+.section {
+    width: 100%;
+    position: relative;
+    padding: 100px 0;
+}
+
+.blue-bg {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+/* --- 1. HERO SECTION --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.hero-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
+
+.hero-text {
+    position: absolute;
+    color: white;
+}
+
+.hero-text.left {
+    bottom: 4%;
+    left: 4%;
+}
+
+.hero-text.right {
+    top: 10%;
+    right: 10%;
+}
+
+.hero h1 {
+    font-size: 5rem;
+    line-height: 1.1;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.hero .date {
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+/* --- 2. GRID GALLERY --- */
+/* --- 2. GRID GALLERY (FULL SCREEN DENGAN BACKGROUND) --- */
+/* --- 2. GRID GALLERY (BACKGROUND HANYA DI DALAM KOTAK) --- */
+.grid-gallery {
+    height: 100vh; /* Tetap full screen secara section */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff; /* Area di luar kotak grid tetap putih/bersih */
+}
+
+.gallery-container {
+    /* Background Gambar hanya di sini */
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://picsum.photos/1000/1000?random=20');
+    background-size: cover;
+    background-position: center;
+    
+    padding: 40px; /* Jarak antara foto dengan tepi background gambar */
+    border-radius: 20px; /* Opsional: membuat sudut background melengkung */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2); /* Memberi kedalaman pada kotak background */
+    
+    width: 90%;
+    max-width: 900px; /* Ukuran diperkecil agar pas di tengah layar */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    transform: rotate(-3deg); /* Efek miring hanya pada kotak ini */
+}
+
+.grid-item {
+    width: 100%;
+    overflow: hidden;
+    border: 3px solid white; /* Memberi kesan seperti foto cetak di atas background */
+}
+
+.grid-item img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-text {
+    grid-column: span 4;
+    text-align: center;
+    padding-top: 20px;
+    transform: rotate(3deg); /* Menetralkan teks */
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+.gallery-text h2 {
+    font-size: 2rem;
+}
+/* --- 3. INFO SECTION (DIPERBAIKI) --- */
+.info-section .flex {
+    align-items: flex-end; /* Membuat foto 'berdiri' di dasar section */
+}
+
+.info-section .number-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 10rem;
+    position: absolute;
+    top: -50px;
+    left: -30px;
+    color: #e3f2fd;
+    z-index: -1;
+}
+
+.info-content {
+    width: 60%;
+    position: relative;
+    padding-bottom: 50px; /* Memberi ruang agar teks tidak terlalu mepet dasar */
+}
+
+.info-photo {
+    width: 40%;
+    position: relative;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.info-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain; /* Memastikan gambar transparan tidak terpotong */
+    /* filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); */
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+/* --- 4. CONSISTENCY SECTION --- */
+.text-block {
+    width: 50%;
+}
+
+.photo-collage {
+    width: 45%;
+    position: relative;
+    height: 500px;
+}
+
+.polaroid {
+    background: white;
+    padding: 15px 15px 40px 15px;
+    position: absolute;
+}
+
+.polaroid.p-1 {
+    top: 50px;
+    left: 0;
+    transform: rotate(-10deg);
+    z-index: 2;
+}
+
+.polaroid.p-2 {
+    bottom: 100px;
+    right: 0;
+    transform: rotate(15deg);
+    z-index: 1;
+}
+
+/* --- 5. FINAL HERO --- */
+.final-hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.final-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.final-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.final-text h1 {
+    font-size: 4rem;
+    color: white;
+}
+
+.final-text p {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 300;
+}
+
+/* --- ANIMASI FADE IN SAAT SCROLL --- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.active {
+    opacity: 1;
+    transform: translateY(0);
+}

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18th Happy Birthday | Neysa Mei Saputri</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- RESET & GLOBAL --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-color: #fdfcf0;
+        }
+
+        h1, h2, h3, .date {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* --- NAVIGASI MELAYANG --- */
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .floating-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .floating-nav a {
+            text-decoration: none;
+            color: #444;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: 0.3s;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .floating-nav a.active, .floating-nav a:hover {
+            background: #fff;
+            color: #ff8fab;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* --- STRUKTUR FULL SCREEN --- */
+        .section {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* --- 1. HERO SECTION --- */
+        .hero-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-text { position: absolute; color: white; }
+        .hero-text.left { bottom: 8%; left: 5%; }
+        .hero-text.right { top: 12%; right: 8%; }
+        .hero h1 { font-size: 5rem; line-height: 1.1; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+
+        /* --- 2. GRID GALLERY (1:1) --- */
+        .grid-gallery { background-color: #fff; }
+        .gallery-container {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/1000/1000?random=20');
+            background-size: cover;
+            background-position: center;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto auto; 
+            gap: 15px;
+            transform: rotate(-2deg);
+            align-content: center;
+        }
+        .grid-item {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            border-radius: 4px;
+        }
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-text {
+            grid-column: span 3;
+            text-align: center;
+            padding-top: 10px;
+            transform: rotate(2deg);
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        /* --- 3. MESSAGE SECTION --- */
+        .message-section { 
+            background: linear-gradient(180deg, #fffcf2 0%, #ffeef2 100%); 
+            position: relative;
+        }
+        
+        .sticker {
+            position: absolute;
+            z-index: 1;
+            pointer-events: none;
+            animation: float-soft 6s ease-in-out infinite;
+        }
+        .glow-point {
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(212,175,55,0.8) 30%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(2px);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+        .flare {
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.8), transparent);
+            transform: rotate(45deg);
+            position: relative;
+        }
+        .flare::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 50px; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent);
+            transform: translate(-50%, -50%);
+        }
+        .soft-ring {
+            width: 100px;
+            height: 100px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 50%;
+        }
+
+        @keyframes float-soft {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.4; }
+            50% { transform: translate(15px, -20px) rotate(5deg); opacity: 0.8; }
+        }
+        .s1 { top: 10%; left: 8%; animation-delay: 0s; }
+        .s2 { top: 15%; right: 12%; animation-delay: 1s; }
+        .s3 { bottom: 25%; left: 5%; animation-delay: 2s; }
+        .s4 { top: 45%; left: 2%; animation-duration: 8s; }
+
+        .info-content { width: 55%; position: relative; z-index: 10; padding-left: 5%; }
+        
+        .info-photo { 
+            position: absolute;
+            bottom: -10px; 
+            right: -5%;  
+            width: 90vh; 
+            z-index: 5;
+        }
+        .info-photo img { 
+            width: 89%; 
+            display: block;
+            -webkit-mask-image: linear-gradient(to top, transparent 5%, black 25%);
+            mask-image: linear-gradient(to top, transparent 5%, black 25%);
+        }
+
+        .paper {
+            background: rgba(255, 255, 255, 0.85);
+            background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
+            background-size: 20px 20px;
+            width: 100%;
+            height: 350px;
+            padding: 40px;
+            margin-top: 25px;
+            box-shadow: 15px 15px 40px rgba(0,0,0,0.03);
+            border-radius: 20px;
+            border-top: 6px solid #d4af37; 
+            position: relative;
+            overflow-y: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        #text { font-family: 'Poppins', sans-serif; font-size: 1.1em; color: #4e342e; line-height: 1.8; }
+        .cursor { display: inline-block; width: 10px; height: 20px; background: #8d6e63; animation: blink 0.7s infinite; vertical-align: middle; }
+
+        /* --- 4. ACHIEVEMENT --- */
+        .achievement-section {
+            background: linear-gradient(180deg, #ffeef2 0%, #ffdeeb 100%);
+            position: relative;
+        }
+        .text-block { width: 50%; }
+        .photo-collage { width: 45%; position: relative; height: 400px; }
+        .polaroid { background: white; padding: 15px 15px 40px 15px; position: absolute; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .polaroid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+        .polaroid.p-1 { top: 0; left: 0; transform: rotate(-10deg); width: 250px; z-index: 2; }
+        .polaroid.p-2 { bottom: 20px; right: 0; transform: rotate(15deg); width: 220px; z-index: 1; }
+
+        .pink-paper {
+            background: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(5px);
+            border-top: 8px solid #ffb6c1 !important;
+            border-left: none !important;
+        }
+
+        /* --- 5. FINAL --- */
+        .final-image { position: absolute; width: 100%; height: 100%; z-index: -1; }
+        .final-image img { width: 100%; height: 100%; object-fit: cover; }
+        .final-text { text-align: center; color: white; }
+        .final-text h1 { font-size: 4rem; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+
+        @keyframes blink { 50% { opacity: 0; } }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
+        .fade-in.active { opacity: 1; transform: translateY(0); }
+
+        /* --- PERBAIKAN RESPONSIVE KHUSUS HP --- */
+        @media (max-width: 768px) {
+            .section { height: auto; min-height: 100vh; padding: 80px 0; }
+            
+            .floating-nav { top: auto; bottom: 20px; right: 50%; transform: translateX(50%); width: 90%; padding: 8px 10px; }
+            .floating-nav ul { gap: 5px; justify-content: space-around; }
+            .floating-nav a { font-size: 0.7rem; padding: 5px 8px; }
+
+            .hero h1 { font-size: 3rem; }
+            .hero-text.left { bottom: 10%; }
+            .hero-text.right { top: 10%; }
+
+            .gallery-container { grid-template-columns: repeat(2, 1fr); transform: none; width: 95%; padding: 15px; }
+            .gallery-text { grid-column: span 2; transform: none; font-size: 1.2rem; }
+
+            .flex { flex-direction: column; text-align: center; gap: 30px; }
+            .info-content { width: 100%; padding: 0; }
+            .paper { height: 350px; padding: 25px; font-size: 0.9rem; text-align: left; }
+            
+            /* Agar gambar tidak menumpuk teks secara berantakan di HP */
+            .info-photo { position: relative; width: 100%; right: 0; margin-top: 20px; bottom: 0; }
+            .info-photo img { width: 100%; -webkit-mask-image: none; mask-image: none; border-radius: 20px; }
+
+            .text-block { width: 100%; }
+            .photo-collage { width: 100%; height: 320px; }
+            .polaroid { width: 160px; padding: 10px 10px 25px 10px; }
+            .polaroid.p-1 { left: 5%; }
+            .polaroid.p-2 { right: 5%; bottom: 0; }
+
+            .final-text h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="floating-nav">
+        <ul>
+            <li><a href="#hero" class="nav-link">Hero</a></li>
+            <li><a href="#gallery" class="nav-link">Gallery</a></li>
+            <li><a href="#info" class="nav-link">Message</a></li>
+            <li><a href="#achievement" class="nav-link">Story</a></li>
+            <li><a href="#final" class="nav-link">Final</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero" class="section hero">
+        <div class="hero-image"><img src="1775930173321.jpg" alt="Hero"></div>
+        <div class="hero-text left">
+            <h1>HAPPY<br>BIRTHDAY!</h1>
+            <p class="date">2 Mei 2008 - 2 Mei 2026</p>
+        </div>
+        <div class="hero-text right"><h1>18<sup>th</sup></h1></div>
+    </section>
+
+    <section id="gallery" class="section grid-gallery">
+        <div class="gallery-container fade-in">
+            <div class="grid-item"><img src="m1.jpeg"></div>
+            <div class="grid-item"><img src="m2.jpeg"></div>
+            <div class="grid-item"><img src="m3.jpeg"></div>
+            <div class="grid-item"><img src="m4.jpeg"></div>
+            <div class="grid-item"><img src="m5.jpeg"></div>
+            <div class="grid-item"><img src="IMG-20251103-WA0024.jpg"></div>
+            <div class="gallery-text">
+                <h2 style="font-size: 1.8rem;">meii kemasan mini gemassss</h2>
+            </div>
+        </div>
+    </section>
+
+    <section id="info" class="section message-section">
+        <div class="sticker s1"><div class="glow-point"></div></div>
+        <div class="sticker s2"><div class="flare"></div></div>
+        <div class="sticker s3"><div class="glow-point" style="width:15px; height:15px;"></div></div>
+        <div class="sticker s4"><div class="soft-ring"></div></div>
+
+        <div class="container flex" style="align-items: flex-start;">
+            <div class="info-content fade-in">
+                <h2 style="color: #6d4c41; font-size: 2.5rem;">met ultahhhh anak comellll</h2>
+                <p style="color: #a1887f; font-weight: 600; margin-bottom: 10px;">ada wasiat niihh buat kamuuu hehehehhe</p>
+                <div class="paper">
+                    <div id="text"></div>
+                    <span class="cursor"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-photo fade-in">
+            <img src="05d7196b-1321-47dc-a325-fc327ab16ab8_20260422_001140_0000.png" alt="Mei Pramuka">
+        </div>
+    </section>
+
+    <section id="achievement" class="section achievement-section">
+        <div class="container flex">
+            <div class="text-block fade-in">
+                <h2 style="color: #db7093;">Rank 2 Through Consistency!!</h2>
+                <div class="paper pink-paper" style="height: auto; min-height: 100px; box-shadow: 10px 10px 30px rgba(0,0,0,0.05);">
+                    <p style="color: #6d4c41; font-weight: 500;">Selaaaamaat Yaaaw. Aku G Kaget Sihhh soalnya kamu selalu konsisten soal nilai HEBAATT!</p>
+                </div>
+            </div>
+            <div class="photo-collage fade-in">
+                <div class="polaroid p-1"><img src="https://picsum.photos/300/300?random=11"></div>
+                <div class="polaroid p-2"><img src="https://picsum.photos/300/300?random=12"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="final" class="section final-hero">
+        <div class="final-image"><img src="IMG-20251103-WA0024.jpg" alt="Final"></div>
+        <div class="final-text fade-in">
+            <h1>Happy Birthday!!</h1>
+            <p style="font-size: 1.5rem; letter-spacing: 2px;">Neysa Mei Saputri</p>
+        </div>
+    </section>
+
+    <script>
+        const message = "Hai meiiii yang cantikk, imup dan menggemaskannn,\n\nmet ultahh yaaaa, btw ini kali kedua aku ngerayain ultah kamuuu(walaupun kecil-kecilan hehehehehe) semoga ada kali ketiga, keempat dan seterusnyaaa. Hindia said \"Segala doa yang baik adanya, untukmu dan mimpimu yang mulia.\" kalo inii versi akuuuu, di usia yang semakin serius iniii, semoga kamu menjadi pribadi yang lebih baikk, dilancarkan rezeki nyaa, dimudahkan segala urusan nyaa, diberi umur yang barokahh, semoga semua yang pengen kamu capai bisa tercapaii, tetap jadi anak perempuan yang baikk hatii yaaa, meski sekarang udah 18 tahun, kamu haruss tetep jadi mei yang baik hatii, imup, comell yang aku kenall. Pokonyaa yang baik baikk, jangan aneh-anehh, biar aku aja yang anehh wkwkwk. Makasihh yaa kamu udah lahir di dunia inii, mungkin kamu salah satu alasan kenapa aku dulu ngeiyain pertanyaan sebelum lahir di duniaa, I`m very lucky to know youu. Pokonya aku doakan yang terbaik buat kamuuu. mungkin segituu ajaa, aku ga pandai rangkai kata-kata wkkwkwkwkwk";
+        
+        let i = 0;
+        let typewriterTimeout;
+
+        function typeWriter() {
+            if (i < message.length) {
+                const char = message.charAt(i);
+                document.getElementById("text").innerHTML += char === '\n' ? '<br>' : char;
+                i++;
+                typewriterTimeout = setTimeout(typeWriter, 45);
+            }
+        }
+
+        function resetTypewriter() {
+            clearTimeout(typewriterTimeout);
+            i = 0;
+            const textEl = document.getElementById("text");
+            if(textEl) textEl.innerHTML = "";
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if(entry.target.id === 'info') {
+                        resetTypewriter();
+                        typeWriter();
+                    }
+                } else {
+                    if(entry.target.id === 'info') resetTypewriter();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.fade-in, section').forEach(el => observer.observe(el));
+
+        window.addEventListener('scroll', () => {
+            let current = "";
+            document.querySelectorAll('.section').forEach(section => {
+                if (pageYOffset >= section.offsetTop - 250) current = section.getAttribute('id');
+            });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) link.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
