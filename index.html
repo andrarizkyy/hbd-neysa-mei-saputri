@@ -233,7 +233,8 @@
             backdrop-filter: blur(5px);
         }
 
-        #text { font-family: 'Poppins', sans-serif; font-size: 1.1em; color: #4e342e; line-height: 1.8; }
+        /* --- PERBAIKAN TEKS RATA KANAN KIRI DI DESKTOP --- */
+        #text { font-family: 'Poppins', sans-serif; font-size: 1.1em; color: #4e342e; line-height: 1.8; text-align: justify; }
         .cursor { display: inline-block; width: 10px; height: 20px; background: #8d6e63; animation: blink 0.7s infinite; vertical-align: middle; }
 
         /* --- 4. ACHIEVEMENT --- */
@@ -280,7 +281,7 @@
             .gallery-container { grid-template-columns: repeat(2, 1fr); transform: none; width: 95%; padding: 15px; }
             .gallery-text { grid-column: span 2; transform: none; font-size: 1.2rem; }
 
-            /* Message Section Mobile - Persis Seperti Gambar User */
+            /* Message Section Mobile - Perbaikan Total */
             .message-section .container { padding: 0 25px; }
             .info-content { width: 100%; padding: 0; text-align: center; }
             .info-content h2 { font-size: 2.2rem !important; margin-bottom: 5px; }
@@ -291,21 +292,24 @@
                 height: 300px; 
                 padding: 25px; 
                 margin-top: 10px; 
-                text-align: center; 
                 border-top: 4px solid #d4af37;
                 background-image: none; /* Bersih seperti di gambar */
                 box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             }
-            #text { font-size: 1rem; line-height: 1.6; }
+            
+            /* --- PERBAIKAN TEKS RATA KANAN KIRI DI HP --- */
+            #text { font-size: 1rem; line-height: 1.6; text-align: justify; }
 
-            /* Foto Lingkaran Persis Gambar */
+            /* Foto Lingkaran dipindahkan ke BAWAH kotak pesan */
             .info-photo { 
-                position: absolute;
-                bottom: 25%; /* Menumpuk di bagian bawah kartu */
-                right: 5%; 
+                position: relative; /* Bukan absolute lagi agar tidak menumpuk */
+                display: block;
+                margin: 20px auto 0 auto; /* Tengah secara horizontal */
+                bottom: 0;
+                right: 0; 
                 width: 140px; /* Ukuran lingkaran */
                 height: 140px;
-                z-index: 20; 
+                z-index: 5; 
             }
             .info-photo img { 
                 width: 100%; 
