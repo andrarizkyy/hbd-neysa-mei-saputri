@@ -233,8 +233,7 @@
             backdrop-filter: blur(5px);
         }
 
-        /* --- PERBAIKAN TEKS RATA KANAN KIRI DI DESKTOP --- */
-        #text { font-family: 'Poppins', sans-serif; font-size: 1.1em; color: #4e342e; line-height: 1.8; text-align: justify; }
+        #text { font-family: 'Poppins', sans-serif; font-size: 1.1em; color: #4e342e; line-height: 1.8; text-align: left; }
         .cursor { display: inline-block; width: 10px; height: 20px; background: #8d6e63; animation: blink 0.7s infinite; vertical-align: middle; }
 
         /* --- 4. ACHIEVEMENT --- */
@@ -275,58 +274,60 @@
             .floating-nav a { font-size: 0.75rem; padding: 5px 8px; }
 
             .hero h1 { font-size: 3rem; }
-            .hero-text.left { bottom: 10%; }
-            .hero-text.right { top: 10%; }
 
             .gallery-container { grid-template-columns: repeat(2, 1fr); transform: none; width: 95%; padding: 15px; }
             .gallery-text { grid-column: span 2; transform: none; font-size: 1.2rem; }
 
-            /* Message Section Mobile - Perbaikan Total */
-            .message-section .container { padding: 0 25px; }
-            .info-content { width: 100%; padding: 0; text-align: center; }
-            .info-content h2 { font-size: 2.2rem !important; margin-bottom: 5px; }
-            .info-content p { font-size: 1rem; margin-bottom: 15px; }
+            /* Message Section Mobile - Penataan Berdampingan */
+            .message-section .container { padding: 0 15px; }
+            
+            /* Kontainer Flex Khusus Mobile */
+            .flex-mobile { 
+                display: flex; 
+                flex-direction: row; /* Berdampingan Horizontal */
+                align-items: flex-end; 
+                justify-content: space-between;
+                width: 100%;
+                gap: 10px;
+            }
 
-            /* Box Pesan dibuat lebih kecil dan terpusat */
+            .info-content { 
+                width: 65%; /* Surat mengambil 65% area kiri */
+                padding: 0; 
+                text-align: left; 
+            }
+            .info-content h2 { font-size: 1.8rem !important; }
+            
             .paper { 
-                height: 300px; 
-                padding: 25px; 
+                height: 320px; 
+                padding: 20px; 
                 margin-top: 10px; 
                 border-top: 4px solid #d4af37;
-                background-image: none; /* Bersih seperti di gambar */
-                box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
             }
-            
-            /* --- PERBAIKAN TEKS RATA KANAN KIRI DI HP --- */
-            #text { font-size: 1rem; line-height: 1.6; text-align: justify; }
+            #text { font-size: 0.85rem; line-height: 1.5; text-align: left; }
 
-            /* Foto Lingkaran dipindahkan ke BAWAH kotak pesan */
+            /* Foto di Samping Surat */
             .info-photo { 
-                position: relative; /* Bukan absolute lagi agar tidak menumpuk */
-                display: block;
-                margin: 20px auto 0 auto; /* Tengah secara horizontal */
-                bottom: 0;
-                right: 0; 
-                width: 140px; /* Ukuran lingkaran */
-                height: 140px;
-                z-index: 5; 
+                position: relative; 
+                width: 32%; /* Foto mengambil 32% area kanan */
+                margin: 0;
+                bottom: 10px;
+                right: 0;
             }
             .info-photo img { 
-                width: 100%; 
-                height: 100%;
+                width: 100px; /* Ukuran tetap */
+                height: 100px;
                 object-fit: cover;
-                border-radius: 50%; /* Membuat Lingkaran */
-                border: 5px solid #fff; /* Border Putih Tebal */
+                border-radius: 50%;
+                border: 4px solid #fff;
                 box-shadow: 0 5px 15px rgba(0,0,0,0.2);
                 -webkit-mask-image: none;
                 mask-image: none;
             }
 
-            .text-block { width: 100%; text-align: center; }
             .photo-collage { width: 100%; height: 320px; }
-            .polaroid { width: 150px; padding: 10px 10px 25px 10px; }
-            .polaroid.p-1 { left: 5%; }
-            .polaroid.p-2 { right: 5%; bottom: 0; }
+            .polaroid { width: 140px; }
 
             .final-text h1 { font-size: 2.5rem; }
         }
@@ -368,23 +369,21 @@
     </section>
 
     <section id="info" class="section message-section">
-        <div class="sticker s1"><div class="glow-point"></div></div>
-        <div class="sticker s2"><div class="flare"></div></div>
-        <div class="sticker s3"><div class="glow-point" style="width:15px; height:15px;"></div></div>
+        <div class="container">
+            <div class="flex flex-mobile" style="align-items: flex-end;">
+                <div class="info-content fade-in">
+                    <h2 style="color: #6d4c41;">Met Ultahh Mei</h2>
+                    <p style="color: #a1887f; font-weight: 500; font-size: 0.9rem;">Wasiat buat kamu hehehe.</p>
+                    <div class="paper">
+                        <div id="text"></div>
+                        <span class="cursor"></span>
+                    </div>
+                </div>
 
-        <div class="container flex" style="align-items: flex-start;">
-            <div class="info-content fade-in">
-                <h2 style="color: #6d4c41; font-size: 2.5rem;">Met Ultahh Anak Comell</h2>
-                <p style="color: #a1887f; font-weight: 500; margin-bottom: 10px;">Ada wasiat nih buat kamu hehehe.</p>
-                <div class="paper">
-                    <div id="text"></div>
-                    <span class="cursor"></span>
+                <div class="info-photo fade-in">
+                    <img src="05d7196b-1321-47dc-a325-fc327ab16ab8_20260422_001140_0000.png" alt="Mei">
                 </div>
             </div>
-        </div>
-
-        <div class="info-photo fade-in">
-            <img src="05d7196b-1321-47dc-a325-fc327ab16ab8_20260422_001140_0000.png" alt="Mei">
         </div>
     </section>
 
