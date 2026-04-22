@@ -32,7 +32,7 @@
             font-weight: 700;
         }
 
-        /* --- NAVIGASI MELAYANG --- */
+        /* --- NAVIGASI MELAYANG (Versi Sebelumnya) --- */
         .floating-nav {
             position: fixed;
             top: 20px;
@@ -68,25 +68,26 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        /* --- STRUKTUR FULL SCREEN --- */
+        /* --- STRUKTUR SECTIONS --- */
         .section {
             width: 100%;
-            height: 100vh;
+            min-height: 100vh;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            padding: 80px 20px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
             width: 100%;
         }
 
         /* --- 1. HERO SECTION --- */
+        .hero { height: 100vh; padding: 0; }
         .hero-image {
             position: absolute;
             width: 100%;
@@ -128,61 +129,58 @@
         }
         .grid-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        /* --- 3. MESSAGE SECTION --- */
+        /* --- 3. MESSAGE SECTION (PERBAIKAN POSISI FOTO & UKURAN) --- */
         .message-section { 
             background: linear-gradient(180deg, #fffcf2 0%, #ffeef2 100%); 
         }
 
-        /* Wrapper untuk menampung surat dan foto di luarnya */
-        .message-layout {
-            position: relative;
+        .message-wrapper {
+            display: flex;
+            align-items: flex-end; /* Menjajajarkan foto di bawah */
+            justify-content: center;
+            gap: 20px;
             width: 100%;
-            max-width: 800px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding-bottom: 50px; /* Ruang untuk foto di bawah */
         }
 
         .paper {
             background: rgba(255, 255, 255, 0.85);
             background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
             background-size: 24px 24px;
-            width: 100%; /* Lebar tetap sesuai container */
-            height: 400px; /* Tinggi tetap persegi panjang */
-            padding: 40px;
+            flex: 1; /* Agar fleksibel */
+            min-height: 400px; /* Tinggi minimal */
+            height: auto; /* Mengikuti panjang teks agar tidak scroll */
+            padding: 50px;
             box-shadow: 15px 15px 40px rgba(0,0,0,0.03);
             border-radius: 20px;
-            border-top: 6px solid #d4af37; 
+            border-top: 8px solid #d4af37; 
             position: relative;
-            z-index: 10;
-            overflow-y: auto;
             backdrop-filter: blur(5px);
         }
 
         #text { 
             font-family: 'Poppins', sans-serif; 
-            font-size: 1.1rem; 
+            font-size: 1.15rem; 
             color: #4e342e; 
-            line-height: 1.8; 
+            line-height: 2; 
             text-align: left; 
         }
 
-        /* FOTO DI LUAR SURAT (Pojok Kiri Bawah) */
-        .info-photo-outside { 
-            position: absolute;
-            left: -30px;  /* Keluar sedikit ke kiri */
-            bottom: -20px; /* Keluar sedikit ke bawah */
-            width: 180px; 
-            z-index: 20; /* Di atas paper */
+        /* Foto di sebelah kanan luar surat */
+        .info-photo-right {
+            width: 300px; /* Ukuran foto diperbesar */
+            flex-shrink: 0;
         }
-        .info-photo-outside img { 
-            width: 100%; 
-            border-radius: 15px;
-            border: 5px solid white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        .info-photo-right img {
+            width: 100%;
+            border-radius: 20px;
+            border: 6px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             display: block;
         }
 
-        .cursor { display: inline-block; width: 8px; height: 18px; background: #8d6e63; animation: blink 0.7s infinite; vertical-align: middle; }
+        .cursor { display: inline-block; width: 8px; height: 20px; background: #8d6e63; animation: blink 0.7s infinite; vertical-align: middle; }
 
         /* --- 4. ACHIEVEMENT --- */
         .achievement-section { background: linear-gradient(180deg, #ffeef2 0%, #ffdeeb 100%); }
@@ -194,6 +192,7 @@
         .p-2 { bottom: 0; right: 0; transform: rotate(10deg); z-index: 1; }
 
         /* --- 5. FINAL --- */
+        .final-hero { height: 100vh; padding: 0; }
         .final-image { position: absolute; width: 100%; height: 100%; z-index: -1; }
         .final-image img { width: 100%; height: 100%; object-fit: cover; }
         .final-text { text-align: center; color: white; }
@@ -203,22 +202,27 @@
         .fade-in.active { opacity: 1; transform: translateY(0); }
 
         /* --- RESPONSIVE HP --- */
+        @media (max-width: 992px) {
+            .message-wrapper { flex-direction: column; align-items: center; }
+            .info-photo-right { width: 80%; order: 2; margin-top: 20px; }
+            .paper { width: 100%; order: 1; padding: 30px; }
+        }
+
         @media (max-width: 768px) {
-            .section { height: auto; min-height: 100vh; padding: 60px 0; }
             .hero h1 { font-size: 3rem; }
-            .message-layout { width: 90%; }
-            .paper { height: 450px; padding: 25px; }
-            #text { font-size: 0.95rem; }
-            .info-photo-outside { 
-                width: 140px; 
-                left: -10px; 
-                bottom: -30px; 
+            .floating-nav { 
+                top: auto; 
+                bottom: 20px; 
+                right: 50%; 
+                transform: translateX(50%); 
+                width: 90%; 
+                padding: 10px;
             }
+            .floating-nav ul { justify-content: space-around; gap: 5px; }
+            .floating-nav a { font-size: 0.7rem; padding: 5px; }
             .gallery-container { grid-template-columns: repeat(2, 1fr); transform: none; }
-            .achievement-section .container { display: flex; flex-direction: column; gap: 40px; }
+            .achievement-section .container { flex-direction: column; text-align: center; gap: 40px; }
             .text-block, .photo-collage { width: 100%; }
-            .photo-collage { height: 300px; }
-            .polaroid { width: 160px; }
         }
     </style>
 </head>
@@ -256,18 +260,19 @@
 
     <section id="info" class="section message-section">
         <div class="container">
-            <div class="fade-in" style="text-align: center;">
-                <h2 style="color: #6d4c41; font-size: 2.2rem; margin-bottom: 10px;">met ultahhhh anak comellll</h2>
-                
-                <div class="message-layout">
-                    <div class="paper">
-                        <div id="text"></div>
-                        <span class="cursor"></span>
-                    </div>
+            <div class="fade-in" style="text-align: center; margin-bottom: 30px;">
+                <h2 style="color: #6d4c41; font-size: 2.5rem;">met ultahhhh anak comellll</h2>
+                <p style="color: #a1887f; font-weight: 600;">ada wasiat niihh buat kamuuu hehehehhe</p>
+            </div>
 
-                    <div class="info-photo-outside fade-in">
-                        <img src="05d7196b-1321-47dc-a325-fc327ab16ab8_20260422_001140_0000.png" alt="Mei">
-                    </div>
+            <div class="message-wrapper">
+                <div class="paper fade-in">
+                    <div id="text"></div>
+                    <span class="cursor"></span>
+                </div>
+
+                <div class="info-photo-right fade-in">
+                    <img src="05d7196b-1321-47dc-a325-fc327ab16ab8_20260422_001140_0000.png" alt="Mei">
                 </div>
             </div>
         </div>
@@ -328,14 +333,14 @@
                     }
                 }
             });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.1 });
 
         document.querySelectorAll('.fade-in, section').forEach(el => observer.observe(el));
 
         window.addEventListener('scroll', () => {
             let current = "";
             document.querySelectorAll('.section').forEach(section => {
-                if (pageYOffset >= section.offsetTop - 300) current = section.getAttribute('id');
+                if (window.pageYOffset >= section.offsetTop - 300) current = section.getAttribute('id');
             });
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
