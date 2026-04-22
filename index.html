@@ -265,13 +265,13 @@
         .fade-in { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
         .fade-in.active { opacity: 1; transform: translateY(0); }
 
-        /* --- PERBAIKAN RESPONSIVE KHUSUS HP --- */
+        /* --- KHUSUS RESPONSIVE HP --- */
         @media (max-width: 768px) {
-            .section { height: auto; min-height: 100vh; padding: 80px 0; }
+            .section { height: auto; min-height: 100vh; padding: 60px 0 100px 0; }
             
-            .floating-nav { top: auto; bottom: 20px; right: 50%; transform: translateX(50%); width: 90%; padding: 8px 10px; }
+            .floating-nav { top: auto; bottom: 20px; right: 50%; transform: translateX(50%); width: 90%; padding: 8px 10px; background: rgba(255, 255, 255, 0.9); }
             .floating-nav ul { gap: 5px; justify-content: space-around; }
-            .floating-nav a { font-size: 0.7rem; padding: 5px 8px; }
+            .floating-nav a { font-size: 0.75rem; padding: 5px 8px; }
 
             .hero h1 { font-size: 3rem; }
             .hero-text.left { bottom: 10%; }
@@ -280,17 +280,47 @@
             .gallery-container { grid-template-columns: repeat(2, 1fr); transform: none; width: 95%; padding: 15px; }
             .gallery-text { grid-column: span 2; transform: none; font-size: 1.2rem; }
 
-            .flex { flex-direction: column; text-align: center; gap: 30px; }
-            .info-content { width: 100%; padding: 0; }
-            .paper { height: 350px; padding: 25px; font-size: 0.9rem; text-align: left; }
-            
-            /* Agar gambar tidak menumpuk teks secara berantakan di HP */
-            .info-photo { position: relative; width: 100%; right: 0; margin-top: 20px; bottom: 0; }
-            .info-photo img { width: 100%; -webkit-mask-image: none; mask-image: none; border-radius: 20px; }
+            /* Message Section Mobile - Persis Seperti Gambar User */
+            .message-section .container { padding: 0 25px; }
+            .info-content { width: 100%; padding: 0; text-align: center; }
+            .info-content h2 { font-size: 2.2rem !important; margin-bottom: 5px; }
+            .info-content p { font-size: 1rem; margin-bottom: 15px; }
 
-            .text-block { width: 100%; }
+            /* Box Pesan dibuat lebih kecil dan terpusat */
+            .paper { 
+                height: 300px; 
+                padding: 25px; 
+                margin-top: 10px; 
+                text-align: center; 
+                border-top: 4px solid #d4af37;
+                background-image: none; /* Bersih seperti di gambar */
+                box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            }
+            #text { font-size: 1rem; line-height: 1.6; }
+
+            /* Foto Lingkaran Persis Gambar */
+            .info-photo { 
+                position: absolute;
+                bottom: 25%; /* Menumpuk di bagian bawah kartu */
+                right: 5%; 
+                width: 140px; /* Ukuran lingkaran */
+                height: 140px;
+                z-index: 20; 
+            }
+            .info-photo img { 
+                width: 100%; 
+                height: 100%;
+                object-fit: cover;
+                border-radius: 50%; /* Membuat Lingkaran */
+                border: 5px solid #fff; /* Border Putih Tebal */
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                -webkit-mask-image: none;
+                mask-image: none;
+            }
+
+            .text-block { width: 100%; text-align: center; }
             .photo-collage { width: 100%; height: 320px; }
-            .polaroid { width: 160px; padding: 10px 10px 25px 10px; }
+            .polaroid { width: 150px; padding: 10px 10px 25px 10px; }
             .polaroid.p-1 { left: 5%; }
             .polaroid.p-2 { right: 5%; bottom: 0; }
 
@@ -337,12 +367,11 @@
         <div class="sticker s1"><div class="glow-point"></div></div>
         <div class="sticker s2"><div class="flare"></div></div>
         <div class="sticker s3"><div class="glow-point" style="width:15px; height:15px;"></div></div>
-        <div class="sticker s4"><div class="soft-ring"></div></div>
 
         <div class="container flex" style="align-items: flex-start;">
             <div class="info-content fade-in">
-                <h2 style="color: #6d4c41; font-size: 2.5rem;">met ultahhhh anak comellll</h2>
-                <p style="color: #a1887f; font-weight: 600; margin-bottom: 10px;">ada wasiat niihh buat kamuuu hehehehhe</p>
+                <h2 style="color: #6d4c41; font-size: 2.5rem;">Met Ultahh Anak Comell</h2>
+                <p style="color: #a1887f; font-weight: 500; margin-bottom: 10px;">Ada wasiat nih buat kamu hehehe.</p>
                 <div class="paper">
                     <div id="text"></div>
                     <span class="cursor"></span>
@@ -351,7 +380,7 @@
         </div>
 
         <div class="info-photo fade-in">
-            <img src="05d7196b-1321-47dc-a325-fc327ab16ab8_20260422_001140_0000.png" alt="Mei Pramuka">
+            <img src="05d7196b-1321-47dc-a325-fc327ab16ab8_20260422_001140_0000.png" alt="Mei">
         </div>
     </section>
 
@@ -379,7 +408,7 @@
     </section>
 
     <script>
-        const message = "Hai meiiii yang cantikk, imup dan menggemaskannn,\n\nmet ultahh yaaaa, btw ini kali kedua aku ngerayain ultah kamuuu(walaupun kecil-kecilan hehehehehe) semoga ada kali ketiga, keempat dan seterusnyaaa. Hindia said \"Segala doa yang baik adanya, untukmu dan mimpimu yang mulia.\" kalo inii versi akuuuu, di usia yang semakin serius iniii, semoga kamu menjadi pribadi yang lebih baikk, dilancarkan rezeki nyaa, dimudahkan segala urusan nyaa, diberi umur yang barokahh, semoga semua yang pengen kamu capai bisa tercapaii, tetap jadi anak perempuan yang baikk hatii yaaa, meski sekarang udah 18 tahun, kamu haruss tetep jadi mei yang baik hatii, imup, comell yang aku kenall. Pokonyaa yang baik baikk, jangan aneh-anehh, biar aku aja yang anehh wkwkwk. Makasihh yaa kamu udah lahir di dunia inii, mungkin kamu salah satu alasan kenapa aku dulu ngeiyain pertanyaan sebelum lahir di duniaa, I`m very lucky to know youu. Pokonya aku doakan yang terbaik buat kamuuu. mungkin segituu ajaa, aku ga pandai rangkai kata-kata wkkwkwkwkwk";
+        const message = "Hai Meiiii yang cantikk, imup dan menggemaskannn, kamu adalah bintang yang bersinar. met ultahh yaaaa, btw ini kali kedua aku ngerayain ultah kamuuu(walaupun kecil-kecilan hehehehehe) semoga ada kali ketiga, keempat dan seterusnyaaa. Hindia said \"Segala doa yang baik adanya, untukmu dan mimpimu yang mulia.\" kalo inii versi akuuuu, di usia yang semakin serius iniii, semoga kamu menjadi pribadi yang lebih baikk, dilancarkan rezeki nyaa, dimudahkan segala urusan nyaa, diberi umur yang barokahh, semoga semua yang pengen kamu capai bisa tercapaii, tetap jadi anak perempuan yang baikk hatii yaaa, meski sekarang udah 18 tahun, kamu haruss tetep jadi mei yang baik hatii, imup, comell yang aku kenall. Pokonyaa yang baik baikk, jangan aneh-anehh, biar aku aja yang anehh wkwkwk. Makasihh yaa kamu udah lahir di dunia inii, mungkin kamu salah satu alasan kenapa aku dulu ngeiyain pertanyaan sebelum lahir di duniaa, I`m very lucky to know youu. Pokonya aku doakan yang terbaik buat kamuuu. mungkin segituu ajaa, aku ga pandai rangkai kata-kata wkkwkwkwkwk";
         
         let i = 0;
         let typewriterTimeout;
@@ -419,7 +448,7 @@
         window.addEventListener('scroll', () => {
             let current = "";
             document.querySelectorAll('.section').forEach(section => {
-                if (pageYOffset >= section.offsetTop - 250) current = section.getAttribute('id');
+                if (window.pageYOffset >= section.offsetTop - 250) current = section.getAttribute('id');
             });
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
