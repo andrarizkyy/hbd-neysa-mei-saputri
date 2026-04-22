@@ -9,190 +9,84 @@
     
     <style>
         /* --- RESET & GLOBAL --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; color: #333; overflow-x: hidden; line-height: 1.6; background-color: #fdfcf0; }
+        h1, h2, h3, .date { font-family: 'Playfair Display', serif; font-weight: 700; }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: #333;
-            overflow-x: hidden;
-            line-height: 1.6;
-            background-color: #fdfcf0;
-        }
-
-        h1, h2, h3, .date {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-        }
-
-        /* --- NAVIGASI MELAYANG (Versi Sebelumnya) --- */
+        /* --- NAVIGASI MELAYANG --- */
         .floating-nav {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            padding: 10px 20px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px);
+            padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
+        .floating-nav ul { list-style: none; display: flex; gap: 15px; }
+        .floating-nav a { text-decoration: none; color: #444; font-size: 0.85rem; font-weight: 600; transition: 0.3s; padding: 5px 10px; border-radius: 20px; }
+        .floating-nav a.active, .floating-nav a:hover { background: #fff; color: #ff8fab; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 
-        .floating-nav ul {
-            list-style: none;
-            display: flex;
-            gap: 15px;
-        }
+        /* --- STRUKTUR --- */
+        .section { width: 100%; height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
+        .flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
 
-        .floating-nav a {
-            text-decoration: none;
-            color: #444;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: 0.3s;
-            padding: 5px 10px;
-            border-radius: 20px;
-        }
-
-        .floating-nav a.active, .floating-nav a:hover {
-            background: #fff;
-            color: #ff8fab;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        /* --- STRUKTUR SECTIONS --- */
-        .section {
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            padding: 80px 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        /* --- 1. HERO SECTION --- */
-        .hero { height: 100vh; padding: 0; }
-        .hero-image {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        /* --- 1. HERO --- */
+        .hero-image { position: absolute; width: 100%; height: 100%; z-index: -1; }
+        .hero-image img { width: 100%; height: 100%; object-fit: cover; }
         .hero-text { position: absolute; color: white; }
         .hero-text.left { bottom: 8%; left: 5%; }
         .hero-text.right { top: 12%; right: 8%; }
         .hero h1 { font-size: 5rem; line-height: 1.1; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
 
-        /* --- 2. GRID GALLERY --- */
+        /* --- 2. GALLERY --- */
         .grid-gallery { background-color: #fff; }
         .gallery-container {
             background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/1000/1000?random=20');
-            background-size: cover;
-            background-position: center;
-            padding: 30px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 800px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            transform: rotate(-2deg);
+            background-size: cover; padding: 30px; border-radius: 20px; width: 90%; max-width: 800px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; transform: rotate(-2deg);
         }
-        .grid-item {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
-            border: 4px solid white;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-            border-radius: 4px;
-        }
+        .grid-item { width: 100%; aspect-ratio: 1/1; overflow: hidden; border: 4px solid white; border-radius: 4px; }
         .grid-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .gallery-text { grid-column: span 3; text-align: center; color: white; transform: rotate(2deg); }
 
-        /* --- 3. MESSAGE SECTION (PERBAIKAN POSISI FOTO & UKURAN) --- */
-        .message-section { 
-            background: linear-gradient(180deg, #fffcf2 0%, #ffeef2 100%); 
-        }
-
-        .message-wrapper {
-            display: flex;
-            align-items: flex-end; /* Menjajajarkan foto di bawah */
-            justify-content: center;
-            gap: 20px;
-            width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+        /* --- 3. MESSAGE SECTION (DESKTOP) --- */
+        .message-section { background: linear-gradient(180deg, #fffcf2 0%, #ffeef2 100%); }
+        .info-content { width: 55%; z-index: 10; }
+        .info-photo { position: absolute; bottom: -10px; right: -5%; width: 90vh; z-index: 5; }
+        .info-photo img { width: 85%; mask-image: linear-gradient(to top, transparent 5%, black 25%); -webkit-mask-image: linear-gradient(to top, transparent 5%, black 25%); }
 
         .paper {
-            background: rgba(255, 255, 255, 0.85);
-            background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
-            background-size: 24px 24px;
-            flex: 1; /* Agar fleksibel */
-            min-height: 400px; /* Tinggi minimal */
-            height: auto; /* Mengikuti panjang teks agar tidak scroll */
-            padding: 50px;
-            box-shadow: 15px 15px 40px rgba(0,0,0,0.03);
-            border-radius: 20px;
-            border-top: 8px solid #d4af37; 
-            position: relative;
-            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.9);
+            background-image: radial-gradient(#e5e5e5 1px, transparent 1px); background-size: 20px 20px;
+            width: 100%; height: 380px; padding: 40px; border-radius: 20px; border-top: 6px solid #d4af37;
+            box-shadow: 15px 15px 40px rgba(0,0,0,0.05); overflow-y: auto;
         }
+        #text, #textMobile { font-size: 1.1rem; color: #4e342e; line-height: 1.8; }
+        .cursor { display: inline-block; width: 10px; height: 20px; background: #8d6e63; animation: blink 0.7s infinite; vertical-align: middle; }
 
-        #text { 
-            font-family: 'Poppins', sans-serif; 
-            font-size: 1.15rem; 
-            color: #4e342e; 
-            line-height: 2; 
-            text-align: left; 
+        /* MOBILE ONLY COMPONENTS (Hidden by default) */
+        .mobile-letter-trigger { display: none; text-align: center; z-index: 20; }
+        .envelope-icon { font-size: 80px; cursor: pointer; transition: 0.3s; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1)); }
+        .btn-open { background: #d4af37; color: white; border: none; padding: 12px 25px; border-radius: 25px; font-weight: 600; margin-top: 15px; cursor: pointer; }
+        
+        .mobile-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 2000;
+            display: none; align-items: center; justify-content: center; padding: 20px;
         }
-
-        /* Foto di sebelah kanan luar surat */
-        .info-photo-right {
-            width: 300px; /* Ukuran foto diperbesar */
-            flex-shrink: 0;
-        }
-        .info-photo-right img {
-            width: 100%;
-            border-radius: 20px;
-            border: 6px solid white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            display: block;
-        }
-
-        .cursor { display: inline-block; width: 8px; height: 20px; background: #8d6e63; animation: blink 0.7s infinite; vertical-align: middle; }
+        .modal-content { width: 100%; max-height: 80vh; position: relative; }
+        .close-modal { position: absolute; top: -50px; right: 0; color: white; font-size: 2rem; cursor: pointer; }
 
         /* --- 4. ACHIEVEMENT --- */
         .achievement-section { background: linear-gradient(180deg, #ffeef2 0%, #ffdeeb 100%); }
         .text-block { width: 50%; }
-        .photo-collage { width: 45%; position: relative; height: 350px; }
-        .polaroid { background: white; padding: 15px 15px 35px 15px; position: absolute; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 220px; }
+        .photo-collage { width: 45%; position: relative; height: 400px; }
+        .polaroid { background: white; padding: 15px 15px 40px 15px; position: absolute; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 220px; }
         .polaroid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
         .p-1 { top: 0; left: 0; transform: rotate(-10deg); z-index: 2; }
-        .p-2 { bottom: 0; right: 0; transform: rotate(10deg); z-index: 1; }
+        .p-2 { bottom: 20px; right: 0; transform: rotate(15deg); z-index: 1; }
 
         /* --- 5. FINAL --- */
-        .final-hero { height: 100vh; padding: 0; }
         .final-image { position: absolute; width: 100%; height: 100%; z-index: -1; }
         .final-image img { width: 100%; height: 100%; object-fit: cover; }
         .final-text { text-align: center; color: white; }
@@ -201,27 +95,25 @@
         .fade-in { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
         .fade-in.active { opacity: 1; transform: translateY(0); }
 
-        /* --- RESPONSIVE HP --- */
-        @media (max-width: 992px) {
-            .message-wrapper { flex-direction: column; align-items: center; }
-            .info-photo-right { width: 80%; order: 2; margin-top: 20px; }
-            .paper { width: 100%; order: 1; padding: 30px; }
-        }
-
+        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 768px) {
+            .section { height: auto; min-height: 100vh; padding: 60px 0; }
             .hero h1 { font-size: 3rem; }
-            .floating-nav { 
-                top: auto; 
-                bottom: 20px; 
-                right: 50%; 
-                transform: translateX(50%); 
-                width: 90%; 
-                padding: 10px;
-            }
+            
+            /* Sembunyikan surat versi desktop di HP */
+            .info-content .paper, .info-content h2, .info-content p { display: none; }
+            .info-content { width: 100%; }
+
+            /* Tampilkan Ikon Surat di HP */
+            .mobile-letter-trigger { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
+            .info-photo { position: relative; width: 100%; right: 0; margin-top: 30px; bottom: 0; }
+            .info-photo img { width: 100%; mask-image: none; border-radius: 20px; }
+
+            .floating-nav { top: auto; bottom: 20px; right: 50%; transform: translateX(50%); width: 90%; }
             .floating-nav ul { justify-content: space-around; gap: 5px; }
-            .floating-nav a { font-size: 0.7rem; padding: 5px; }
-            .gallery-container { grid-template-columns: repeat(2, 1fr); transform: none; }
-            .achievement-section .container { flex-direction: column; text-align: center; gap: 40px; }
+            .floating-nav a { font-size: 0.7rem; }
+            
+            .flex { flex-direction: column; }
             .text-block, .photo-collage { width: 100%; }
         }
     </style>
@@ -230,16 +122,16 @@
 
     <nav class="floating-nav">
         <ul>
-            <li><a href="#hero" class="nav-link">Hero</a></li>
-            <li><a href="#gallery" class="nav-link">Gallery</a></li>
-            <li><a href="#info" class="nav-link">Message</a></li>
-            <li><a href="#achievement" class="nav-link">Story</a></li>
-            <li><a href="#final" class="nav-link">Final</a></li>
+            <li><a href="#hero">Hero</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#info">Message</a></li>
+            <li><a href="#achievement">Story</a></li>
+            <li><a href="#final">Final</a></li>
         </ul>
     </nav>
 
-    <section id="hero" class="section hero">
-        <div class="hero-image"><img src="1775930173321.jpg" alt="Hero"></div>
+    <section id="hero" class="section">
+        <div class="hero-image"><img src="1775930173321.jpg"></div>
         <div class="hero-text left">
             <h1>HAPPY<br>BIRTHDAY!</h1>
             <p class="date">2 Mei 2008 - 2 Mei 2026</p>
@@ -255,34 +147,48 @@
             <div class="grid-item"><img src="m4.jpeg"></div>
             <div class="grid-item"><img src="m5.jpeg"></div>
             <div class="grid-item"><img src="IMG-20251103-WA0024.jpg"></div>
+            <div class="gallery-text"><h2>meii kemasan mini gemassss</h2></div>
         </div>
     </section>
 
     <section id="info" class="section message-section">
-        <div class="container">
-            <div class="fade-in" style="text-align: center; margin-bottom: 30px;">
+        <div class="container flex">
+            <div class="info-content fade-in">
                 <h2 style="color: #6d4c41; font-size: 2.5rem;">met ultahhhh anak comellll</h2>
                 <p style="color: #a1887f; font-weight: 600;">ada wasiat niihh buat kamuuu hehehehhe</p>
-            </div>
-
-            <div class="message-wrapper">
-                <div class="paper fade-in">
+                <div class="paper">
                     <div id="text"></div>
                     <span class="cursor"></span>
                 </div>
 
-                <div class="info-photo-right fade-in">
-                    <img src="05d7196b-1321-47dc-a325-fc327ab16ab8_20260422_001140_0000.png" alt="Mei">
+                <div class="mobile-letter-trigger">
+                    <h2 style="color: #6d4c41; margin-bottom: 20px;">Ada pesan buat kamu..</h2>
+                    <div class="envelope-icon" onclick="openModal()">✉️</div>
+                    <button class="btn-open" onclick="openModal()">Buka Surat</button>
                 </div>
             </div>
         </div>
+
+        <div class="info-photo fade-in">
+            <img src="05d7196b-1321-47dc-a325-fc327ab16ab8_20260422_001140_0000.png">
+        </div>
     </section>
 
+    <div id="letterModal" class="mobile-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="paper" style="height: 60vh;">
+                <div id="textMobile"></div>
+                <span class="cursor"></span>
+            </div>
+        </div>
+    </div>
+
     <section id="achievement" class="section achievement-section">
-        <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+        <div class="container flex">
             <div class="text-block fade-in">
                 <h2 style="color: #db7093;">Rank 2 Through Consistency!!</h2>
-                <div style="background: white; padding: 20px; border-radius: 15px; border-top: 5px solid #ffb6c1; margin-top: 15px;">
+                <div class="paper" style="height: auto; min-height: 100px; border-top-color: #ffb6c1; margin-top: 15px;">
                     <p style="color: #6d4c41;">Selaaaamaat Yaaaw. Aku G Kaget Sihhh soalnya kamu selalu konsisten soal nilai HEBAATT!</p>
                 </div>
             </div>
@@ -293,10 +199,10 @@
         </div>
     </section>
 
-    <section id="final" class="section final-hero">
-        <div class="final-image"><img src="IMG-20251103-WA0024.jpg" alt="Final"></div>
+    <section id="final" class="section">
+        <div class="final-image"><img src="IMG-20251103-WA0024.jpg"></div>
         <div class="final-text fade-in">
-            <h1 style="font-size: 4rem;">Happy Birthday!!</h1>
+            <h1>Happy Birthday!!</h1>
             <p style="font-size: 1.5rem; letter-spacing: 2px;">Neysa Mei Saputri</p>
         </div>
     </section>
@@ -305,48 +211,44 @@
         const message = "Hai meiiii yang cantikk, imup dan menggemaskannn,\n\nmet ultahh yaaaa, btw ini kali kedua aku ngerayain ultah kamuuu(walaupun kecil-kecilan hehehehehe) semoga ada kali ketiga, keempat dan seterusnyaaa. Hindia said \"Segala doa yang baik adanya, untukmu dan mimpimu yang mulia.\" kalo inii versi akuuuu, di usia yang semakin serius iniii, semoga kamu menjadi pribadi yang lebih baikk, dilancarkan rezeki nyaa, dimudahkan segala urusan nyaa, diberi umur yang barokahh, semoga semua yang pengen kamu capai bisa tercapaii, tetap jadi anak perempuan yang baikk hatii yaaa, meski sekarang udah 18 tahun, kamu haruss tetep jadi mei yang baik hatii, imup, comell yang aku kenall. Pokonyaa yang baik baikk, jangan aneh-anehh, biar aku aja yang anehh wkwkwk. Makasihh yaa kamu udah lahir di dunia inii, mungkin kamu salah satu alasan kenapa aku dulu ngeiyain pertanyaan sebelum lahir di duniaa, I`m very lucky to know youu. Pokonya aku doakan yang terbaik buat kamuuu. mungkin segituu ajaa, aku ga pandai rangkai kata-kata wkkwkwkwkwk";
         
         let i = 0;
-        let typewriterTimeout;
+        let isTyping = false;
 
-        function typeWriter() {
+        function typeWriter(elementId) {
             if (i < message.length) {
                 const char = message.charAt(i);
-                document.getElementById("text").innerHTML += char === '\n' ? '<br>' : char;
+                document.getElementById(elementId).innerHTML += char === '\n' ? '<br>' : char;
                 i++;
-                typewriterTimeout = setTimeout(typeWriter, 40);
+                setTimeout(() => typeWriter(elementId), 40);
             }
         }
 
-        function resetTypewriter() {
-            clearTimeout(typewriterTimeout);
+        // Fungsi Modal Mobile
+        function openModal() {
+            document.getElementById('letterModal').style.display = 'flex';
+            document.getElementById('textMobile').innerHTML = "";
             i = 0;
-            const textEl = document.getElementById("text");
-            if(textEl) textEl.innerHTML = "";
+            typeWriter('textMobile');
         }
 
+        function closeModal() {
+            document.getElementById('letterModal').style.display = 'none';
+        }
+
+        // Observer untuk Desktop
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    if(entry.target.id === 'info') {
-                        resetTypewriter();
-                        typeWriter();
+                    // Jalankan ketikan desktop HANYA jika bukan layar mobile
+                    if(entry.target.id === 'info' && window.innerWidth > 768 && !isTyping) {
+                        isTyping = true;
+                        typeWriter('text');
                     }
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.3 });
 
         document.querySelectorAll('.fade-in, section').forEach(el => observer.observe(el));
-
-        window.addEventListener('scroll', () => {
-            let current = "";
-            document.querySelectorAll('.section').forEach(section => {
-                if (window.pageYOffset >= section.offsetTop - 300) current = section.getAttribute('id');
-            });
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) link.classList.add('active');
-            });
-        });
     </script>
 </body>
 </html>
